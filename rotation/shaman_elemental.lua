@@ -403,7 +403,7 @@ function Rotation:execute()
     if isTargetAttackable and spellKnown.flameShock and GMR.IsCastable(spells.flameShock, "target")
             and GMR.IsSpellInRange(spells.flameShock, "target") and shouldCastFlameShock then
         self.dbgPrint("should cast lightningBolt")
-        GMR.Cast(spells.lightningBolt, "target")
+        GMR.Cast(spells.flameShock, "target")
         return
     end
 
