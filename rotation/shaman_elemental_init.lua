@@ -35,7 +35,7 @@ AMST_SHARE["CR>S/E.CFG"] = Config
 if Config.onlineLoad then
     local httpRequester = _G.SendHttpRequestTinkrFix or GMR.SendHttpRequest
     httpRequester({
-        Url = "https://raw.githubusercontent.com/AmsTaFFix/gmr-stuff/main/plugins/wotlk/rotations/paladin/02_amstaffix_paladin_retri_rotation.lua",
+        Url = "https://raw.githubusercontent.com/dokle/gmr/main/rotation/shaman_elemental.lua",
         Method = "Get",
         Callback = function(content)
             GMR.RunString(content)
