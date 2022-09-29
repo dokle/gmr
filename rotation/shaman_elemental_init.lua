@@ -26,7 +26,8 @@ local Config = {
     ---Use standard CombatRotation pluggable function. Change only if you know what you are doing.
     useCombatRotationLauncher = true,
     ---Use online loading feature to get last updates
-    onlineLoad = true
+    onlineLoad = true,
+
 }
 
 

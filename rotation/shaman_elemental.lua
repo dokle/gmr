@@ -45,105 +45,46 @@ local CLASS_DEMONHUNTER = "DEMONHUNTER"
 local CLASS_EVOKER = "EVOKER"
 
 local spells = {
-    exorcism = GetSpellInfo(5614),
-    flashOfLight = GetSpellInfo(19939),
-    hammerOfWrath = GetSpellInfo(24275),
-    handOfReckoning = GetSpellInfo(62124),
-    purify = GetSpellInfo(1152),
-    cleanse = GetSpellInfo(4987),
-    crusaderStrike = GetSpellInfo(35395),
-    consecrations = GetSpellInfo(20116),
-    divineStorm = GetSpellInfo(53385),
-    judgementOfLight = GetSpellInfo(20271),
-    judgementOfWisdom = GetSpellInfo(53408),
-    judgementOfJustice = GetSpellInfo(53407),
-    devotionAura = GetSpellInfo(10293),
-    retributionAura = GetSpellInfo(10301),
-    concentrationAura = GetSpellInfo(19746),
-    crusaderAura = GetSpellInfo(32223),
-    blessingOfFreedom = GetSpellInfo(1044),
-    blessingOfMight = GetSpellInfo(19837),
-    blessingOfKings = GetSpellInfo(20217),
-    blessingOfWisdom = GetSpellInfo(27142),
-    sealOfRighteousness = GetSpellInfo(21084),
-    sealOfJustice = GetSpellInfo(20164),
-    sealOfLight = GetSpellInfo(20165),
-    sealOfWisdom = GetSpellInfo(20166),
-    sealOfCommand = GetSpellInfo(20375),
-    sealOfCorruption = GetSpellInfo(348704),
-    greaterBlessingOfMight = GetSpellInfo(25916),
-    greaterBlessingOfKings = GetSpellInfo(25898),
-    shadowResistanceAura = GetSpellInfo(27151),
-    frostResistanceAura = GetSpellInfo(19898),
-    divineProtection = GetSpellInfo(498),
-    handOfProtection = GetSpellInfo(5599),
-    fireResistanceAura = GetSpellInfo(27153),
-    holyLight = GetSpellInfo(25292),
-    flashOfLight = GetSpellInfo(19943),
-    holyShock = GetSpellInfo(33072),
+    lightningBolt = GetSpellInfo(49238),
+    chainLightning = GetSpellInfo(49271),
+    thunderstorm = GetSpellInfo(59159),
+    totemOfWrath = GetSpellInfo(57722),
+    manaSpringTotem = GetSpellInfo(58774),
+    healingStreamTotem = GetSpellInfo(58757),
+    healingWave = GetSpellInfo(49273),
+    lesserHealingWave = GetSpellInfo(8004),
+    lavaBurst = GetSpellInfo(60043),
+    flameShock = GetSpellInfo(49233),
+    earthShock = GetSpellInfo(49231),
+    frostShock = GetSpellInfo(49236),
+    flameTongueWeapon = GetSpellInfo(58790),
+    waterShield = GetSpellInfo(58790),
+    callOfTheElements = GetSpellInfo(66842),
+    elementalMastery = GetSpellInfo(16166)
 }
 
 local spellKnown = {
-    exorcism = GMR.IsSpellKnown(spells.exorcism),
-    flashOfLight = GMR.IsSpellKnown(spells.flashOfLight),
-    hammerOfWrath = GMR.IsSpellKnown(spells.hammerOfWrath),
-    handOfReckoning = GMR.IsSpellKnown(spells.handOfReckoning),
-    purify = GMR.IsSpellKnown(spells.purify),
-    cleanse = GMR.IsSpellKnown(spells.cleanse),
-    crusaderStrike = GMR.IsSpellKnown(spells.crusaderStrike),
-    consecrations = GMR.IsSpellKnown(spells.consecrations),
-    divineStorm = GMR.IsSpellKnown(spells.divineStorm),
-    judgementOfLight = GMR.IsSpellKnown(spells.judgementOfLight),
-    judgementOfWisdom = GMR.IsSpellKnown(spells.judgementOfWisdom),
-    judgementOfJustice = GMR.IsSpellKnown(spells.judgementOfJustice),
-    devotionAura = GMR.IsSpellKnown(spells.devotionAura),
-    retributionAura = GMR.IsSpellKnown(spells.retributionAura),
-    concentrationAura = GMR.IsSpellKnown(spells.concentrationAura),
-    crusaderAura = GMR.IsSpellKnown(spells.crusaderAura),
-    blessingOfFreedom = GMR.IsSpellKnown(spells.blessingOfFreedom),
-    blessingOfMight = GMR.IsSpellKnown(spells.blessingOfMight),
-    blessingOfKings = GMR.IsSpellKnown(spells.blessingOfKings),
-    blessingOfWisdom = GMR.IsSpellKnown(spells.blessingOfWisdom),
-    sealOfRighteousness = GMR.IsSpellKnown(spells.sealOfRighteousness),
-    sealOfJustice = GMR.IsSpellKnown(spells.sealOfJustice),
-    sealOfLight = GMR.IsSpellKnown(spells.sealOfLight),
-    sealOfWisdom = GMR.IsSpellKnown(spells.sealOfWisdom),
-    sealOfCommand = GMR.IsSpellKnown(spells.sealOfCommand),
-    greaterBlessingOfMight = GMR.IsSpellKnown(spells.greaterBlessingOfMight),
-    greaterBlessingOfKings = GMR.IsSpellKnown(spells.greaterBlessingOfKings),
-    shadowResistanceAura = GMR.IsSpellKnown(spells.shadowResistanceAura),
-    frostResistanceAura = GMR.IsSpellKnown(spells.frostResistanceAura),
-    divineProtection = GMR.IsSpellKnown(spells.divineProtection),
-    handOfProtection = GMR.IsSpellKnown(spells.handOfProtection),
-    fireResistanceAura = GMR.IsSpellKnown(spells.fireResistanceAura),
-    sealOfCorruption = GMR.IsSpellKnown(spells.sealOfCorruption),
-    holyLight = GMR.IsSpellKnown(spells.holyLight),
-    flashOfLight = GMR.IsSpellKnown(spells.flashOfLight),
-    holyShock = GMR.IsSpellKnown(spells.holyShock),
+    lightningBolt = GMR.IsSpellKnown(spells.lightningBolt),
+    chainLightning = GMR.IsSpellKnown(spells.chainLightning),
+    thunderstorm = GMR.IsSpellKnown(spells.thunderstorm),
+    totemOfWrath = GMR.IsSpellKnown(spells.totemOfWrath),
+    manaSpringTotem = GMR.IsSpellKnown(spells.manaSpringTotem),
+    healingStreamTotem = GMR.IsSpellKnown(spells.healingStreamTotem),
+    healingWave = GMR.IsSpellKnown(spells.healingWave),
+    lesserHealingWave = GMR.IsSpellKnown(spells.lesserHealingWave),
+    lavaBurst = GMR.IsSpellKnown(spells.lavaBurst),
+    flameShock = GMR.IsSpellKnown(spells.flameShock),
+    earthShock = GMR.IsSpellKnown(spells.earthShock),
+    frostShock = GMR.IsSpellKnown(spells.frostShock),
+    flameTongueWeapon = GMR.IsSpellKnown(spells.flameTongueWeapon),
+    elementalMastery = GMR.IsSpellKnown(spells.elementalMastery),
+    waterShield = GMR.IsSpellKnown(spells.waterShield)
 }
 
 local buffs = {
-    theArtOfWar = GetSpellInfo(59578),
-    blessingOfMight = GetSpellInfo(19837),
-    blessingOfKings = GetSpellInfo(20217),
-    sealOfRighteousness = GetSpellInfo(21084),
-    sealOfJustice = GetSpellInfo(20164),
-    sealOfLight = GetSpellInfo(20165),
-    sealOfWisdom = GetSpellInfo(20166),
-    sealOfCommand = GetSpellInfo(20375),
-    sealOfCorruption = GetSpellInfo(348704),
-    greaterBlessingOfMight = GetSpellInfo(25916),
-    greaterBlessingOfKings = GetSpellInfo(25898),
-    battleShout = GetSpellInfo(2048),
-    devotionAura = GetSpellInfo(10293),
-    retributionAura = GetSpellInfo(10301),
-    concentrationAura = GetSpellInfo(19746),
-    crusaderAura = GetSpellInfo(32223),
-    shadowResistanceAura = GetSpellInfo(27151),
-    frostResistanceAura = GetSpellInfo(19898),
-    fireResistanceAura = GetSpellInfo(27153),
-    infusionOfLight = GetSpellInfo(54149),
-    blessingOfWisdom = GetSpellInfo(27142),
+    waterShield = GetSpellInfo(57961),
+    totemOfWrath = GetSpellInfo(17539),
+    totemOfWrathGlyph = GetSpellInfo(63283)
 }
 
 local buffSameClassLists = {
@@ -312,7 +253,6 @@ local Config = {
     onlineLoad = true
 }
 
-
 function Config:new()
     local o = {}
     setmetatable(o, self)
@@ -336,20 +276,7 @@ end
 
 ---@class ShamanState
 local State = {
-    judgmentToUse = spells.judgementOfLight,
-    judgmentToUseKnown = spellKnown.judgementOfLight,
-    judgmentToUseDebuff = debuffs.judgementOfLight,
 
-    defaultAura = spells.devotionAura,
-
-    defaultBlessingSpell = spells.blessingOfMight,
-    defaultBlessingKnown = spellKnown.blessingOfMight,
-    defaultBlessingBuff = buffs.blessingOfMight,
-
-    ---@type PaladinSealSettings
-    defaultSeal = PaladinSealSettings:new(0, "", false, ""),
-    ---@type PaladinSealSettings[]
-    ignoredSeals = {}
 }
 
 function State:new()
@@ -363,39 +290,7 @@ end
 ---@param cfg ShamanConfig config
 ---@return void
 function State:determine(cfg)
-    if cfg.useJudgmentType == 2 and spellKnown.judgementOfWisdom then
-        self.judgmentToUse = spells.judgementOfWisdom
-        self.judgmentToUseKnown = spellKnown.judgementOfWisdom
-        self.judgmentToUseDebuff = debuffs.judgementOfWisdom
-    elseif cfg.useJudgmentType == 3 and spellKnown.judgementOfJustice then
-        self.judgmentToUse = spells.judgementOfJustice
-        self.judgmentToUseKnown = spellKnown.judgementOfJustice
-        self.judgmentToUseDebuff = debuffs.judgementOfJustice
-    end
 
-    if cfgIndexToAuraSettingsMap[cfg.defaultAuraToUse] and cfgIndexToAuraSettingsMap[cfg.defaultAuraToUse].spellKnown then
-        self.defaultAura = cfgIndexToAuraSettingsMap[cfg.defaultAuraToUse].spell
-    end
-
-    if cfg.defaultBlessingToUse == 2 and spellKnown.blessingOfKings then
-        self.defaultBlessingSpell = spells.blessingOfKings
-        self.defaultBlessingKnown = spellKnown.blessingOfKings
-        self.defaultBlessingBuff = buffs.blessingOfKings
-    elseif cfg.defaultBlessingToUse == 3 and spellKnown.blessingOfWisdom then
-        self.defaultBlessingSpell = spells.blessingOfWisdom
-        self.defaultBlessingKnown = spellKnown.blessingOfWisdom
-        self.defaultBlessingBuff = buffs.blessingOfWisdom
-    end
-
-    if cfgIndexToSealSettingsMap[cfg.defaultSealToUse] and cfgIndexToSealSettingsMap[cfg.defaultSealToUse].spellKnown then
-        self.defaultSeal = cfgIndexToSealSettingsMap[cfg.defaultSealToUse]
-    end
-
-    for _, sealCfgIndex in ipairs(cfg.defaultSealDoNotSwitchList) do
-        if cfgIndexToSealSettingsMap[sealCfgIndex] and cfgIndexToSealSettingsMap[sealCfgIndex].spellKnown then
-            table.insert(self.ignoredSeals, cfgIndexToSealSettingsMap[sealCfgIndex])
-        end
-    end
 end
 
 ---@param cfg ShamanConfig
@@ -489,169 +384,41 @@ function Rotation:execute()
         return
     end
 
-
-
-
-    if not GMR.HasDebuff("player", debuffs.forbearance) then
-        if spellKnown.handOfProtection and GMR.GetHealth("player") < self.cfg.useHandOfProtectionMinHP
-                and GMR.IsCastable(spells.handOfProtection, "player")
-        then
-            self.dbgPrint("should cast hand of protection on player")
-            GMR.Cast(spells.handOfProtection, "player")
-            return
-        end
-
-        if spellKnown.divineProtection and GMR.GetHealth("player") < self.cfg.useDivineProtectionMinHP
-                and GMR.IsCastable(spells.divineProtection, "player")
-        then
-            self.dbgPrint("should cast divine protection on player")
-            GMR.Cast(spells.divineProtection, "player")
-            return
-        end
-    end
-
-    if self.state.defaultBlessingKnown and not HasBuffClassed("player", self.state.defaultBlessingBuff)
-            and GMR.IsCastable(self.state.defaultBlessingSpell, "player")
-    then
-        self.dbgPrint("should cast default blessing '" .. self.state.defaultBlessingSpell .. "' on player")
-        GMR.Cast(self.state.defaultBlessingSpell, "player")
-        return
-    end
-
-    if self.state.defaultSeal.spellKnown and not GMR.HasBuff("player", self.state.defaultSeal.buff)
-            and GMR.IsCastable(self.state.defaultSeal.spell, "player")
-    then
-        local alreadyHasIgnoredSeal = false
-        for _, ignoreSeal in ipairs(self.state.ignoredSeals) do
-            if GMR.HasBuff("player", ignoreSeal.buff) then
-                alreadyHasIgnoredSeal = true
-                break
-            end
-        end
-        if not alreadyHasIgnoredSeal then
-            self.dbgPrint("should cast default seal '" .. self.state.defaultSeal.spell .. "' on player")
-            GMR.Cast(self.state.defaultSeal.spell, "player")
-            return
-        end
+    local targetFlameShockExpiration = GMR.GetDebuffExpiration("target", spells.flameShock)
+    local shouldCastFlameShock = false
+    if targetFlameShockExpiration <= 3 then
+        shouldCastFlameShock = true
     end
 
     local isTargetAttackable = GMR.IsAlive("target") and GMR.UnitCanAttack("player", "target")
             and not GMR.IsImmune("target")
+    local enemiesAround8y = GMR.GetNumEnemies("player", 8)
 
-    -- Hammer of Wrath
-    if spellKnown.hammerOfWrath then
-        for i = 1, #GMR.Tables.Attackables do
-            local attackable = GMR.Tables.Attackables[i][1]
-            if GMR.ObjectExists(attackable) and GMR.IsAlive(attackable) and GMR.GetHealth(attackable) < 20
-                    and GMR.IsCastable(spells.hammerOfWrath, attackable)
-            then
-                self.dbgPrint("should cast hammer of wrath")
-                GMR.Cast(spells.hammerOfWrath, attackable)
-                return
-            end
-        end
-    end
 
-    -- Judgement
-    if self.state.judgmentToUseKnown and GetSpellCooldown(self.state.judgmentToUse) == 0 and isTargetAttackable then
-        if not self.cfg.useJudgmentForDebuffOnly or (self.cfg.useJudgmentForDebuffOnly
-                and not GMR.HasBuff("target", self.state.judgmentToUseDebuff, true))
-        then
-            local unitToCast = "target"
-            if self.cfg.useJudgmentTryToCleave then
-                for i = 1, #GMR.Tables.Attackables do
-                    local attackable = GMR.Tables.Attackables[i][1]
-                    if GMR.ObjectExists(attackable) and GMR.IsCastable(self.state.judgmentToUse, attackable)
-                            and GMR.GetDistance("player", attackable, "<", 10)
-                            and not GMR.IsImmune(attackable)
-                            and GMR.GetDebuffExpiration(attackable, self.state.judgmentToUseDebuff) < self.cfg.useJudgmentCooldown
-                    then
-                        unitToCast = attackable
-                        break
-                    end
-                end
-            end
-
-            if unitToCast and GMR.IsCastable(self.state.judgmentToUse, unitToCast) then
-                self.dbgPrint("should cast default judgment '" .. self.state.judgmentToUse .. "'")
-                GMR.Cast(self.state.judgmentToUse, unitToCast)
-                return
-            end
-        end
-    end
-
-    if self:cleanse("player") then
-        return
-    end
-
-    if GMR.HasBuff("player", buffs.theArtOfWar) then
-        if spellKnown.flashOfLight and GMR.GetHealth("player") < self.cfg.consumeArtOfWarFlashLightMinHp
-                and GMR.IsCastable(spells.flashOfLight, "player")
-        then
-            self.dbgPrint("should cast flash of light on self to consume the art of war aura")
-            GMR.Cast(spells.flashOfLight, "player")
-            return
-        elseif isTargetAttackable and spellKnown.exorcism and GMR.IsCastable(spells.exorcism, "target") then
-            self.dbgPrint("should cast exorcism on target to consume the art of war aura")
-            GMR.Cast(spells.exorcism, "target")
-            return
-        elseif self.cfg.consumeArtOfWarFlashLightIfAuraDepletedSoon and spellKnown.flashOfLight
-                and GMR.GetBuffExpiration("player", buffs.theArtOfWar) < 2
-                and GMR.GetHealth("player") < 100 and GMR.IsCastable(spells.flashOfLight, "player")
-        then
-            self.dbgPrint("should cast flash of light on self to consume the art of war aura. Aura will deplete soon.")
-            GMR.Cast(spells.flashOfLight, "player")
+    -- Thunderstorm
+    if spellKnown.thunderstorm and GetSpellCooldown(spells.thunderstorm) == 0 and isTargetAttackable and enemiesAround8y > 1 then
+        if GMR.IsCastable(spells.thunderstorm, "target") then
+            self.dbgPrint("should use thunderstorm")
+            GMR.Cast(spells.thunderstorm, "target")
             return
         end
     end
 
-    if self:applyBlessingOfFreedom("player") then
+    if isTargetAttackable and spellKnown.flameShock and GMR.IsCastable(spells.flameShock, "target")
+            and GMR.IsSpellInRange(spells.flameShock, "target") and shouldCastFlameShock then
+        self.dbgPrint("should cast lightningBolt")
+        GMR.Cast(spells.lightningBolt, "target")
         return
     end
 
-    if self:executeGroupCleanse() then
-        return
-    end
-    if self:executeHeal() then
-        return
-    end
-
-    if isTargetAttackable and self.cfg.useHandOfReckoningToMakeDamage and spellKnown.handOfReckoning
-            and (self.cfg.useHandOfReckoningInInstance or (not self.cfg.useHandOfReckoningInInstance and not IsInInstance()))
-            and not GMR.UnitIsPlayer("target") and not GMR.UnitIsUnit("targettarget", "player")
-            and GMR.IsCastable(spells.handOfReckoning, "target")
-    then
-        self.dbgPrint("should cast hand of reckoning to make some damage")
-        GMR.Cast(spells.handOfReckoning, "target")
+    if isTargetAttackable and spellKnown.lightningBolt and GMR.IsCastable(spells.lightningBolt, "target")
+            and GMR.IsSpellInRange(spells.lightningBolt, "target") then
+        self.dbgPrint("should cast lightningBolt")
+        GMR.Cast(spells.lightningBolt, "target")
         return
     end
 
-    if self.cfg.useConsecrations and spellKnown.consecrations and not GMR.IsMoving()
-            and GMR.GetNumEnemies("player", 10) >= self.cfg.useConsecrationsMinEnemies
-            and GMR.IsCastable(spells.consecrations, "player")
-    then
-        self.dbgPrint("should use consecrations")
-        GMR.Cast(spells.consecrations, "player")
-        return
-    end
 
-    if spellKnown.divineStorm and GMR.GetNumEnemies("player", 8) >= self.cfg.useDivineStormMinEnemies
-            and GMR.IsCastable(spells.divineStorm, "player")
-    then
-        self.dbgPrint("should use divine storm")
-        GMR.Cast(spells.divineStorm, "player")
-        return
-    end
-
-    if isTargetAttackable and spellKnown.crusaderStrike and GMR.IsCastable(spells.crusaderStrike, "target") then
-        self.dbgPrint("should cast crusader strike")
-        GMR.Cast(spells.crusaderStrike, "target")
-        return
-    end
-
-    if self:executeGroupBuff() then
-        return
-    end
 end
 
 ---@return boolean
