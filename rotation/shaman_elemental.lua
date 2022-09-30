@@ -19,6 +19,7 @@ AMST_SHARE = AMST_SHARE or {}
 AMST_SHARE["CR>S/E.LOADED"] = true
 local VERSION = "v1.0.0"
 local printMsgPrefix = "[CR>S/E|" .. VERSION .. "] "
+local PLAYER_TARGET = "player"
 
 ---Print message with CR prefix
 ---@param msg string
@@ -82,8 +83,8 @@ local spellKnown = {
 }
 
 local buffs = {
-    waterShield = GetSpellInfo(57961),
-    totemOfWrath = GetSpellInfo(17539),
+    waterShield = GetSpellInfo(33736),
+    totemOfWrath = GetSpellInfo(57662),
     totemOfWrathGlyph = GetSpellInfo(63283)
 }
 
@@ -382,6 +383,7 @@ function Rotation:execute()
 
     local targetFlameShockExpiration = GMR.GetDebuffExpiration("target", spells.flameShock)
     local shouldCastFlameShock = false
+    local currentMana = GMR.GetMana("player")
     if targetFlameShockExpiration <= 3 then
         shouldCastFlameShock = true
     end
@@ -392,7 +394,9 @@ function Rotation:execute()
 
 
     -- Thunderstorm
-    if spellKnown.thunderstorm and GetSpellCooldown(spells.thunderstorm) == 0 and isTargetAttackable and enemiesAround8y > 1 then
+    if spellKnown.thunderstorm
+            and GetSpellCooldown(spells.thunderstorm) == 0
+            and (enemiesAround8y > 1 or currentMana < 50) then
         if GMR.IsCastable(spells.thunderstorm, "target") then
             self.dbgPrint("should use thunderstorm")
             GMR.Cast(spells.thunderstorm, "target")
@@ -400,10 +404,25 @@ function Rotation:execute()
         end
     end
 
+    if not GMR.HasBuff(PLAYER_TARGET, buffs.waterShield, true)
+        and GMR.IsCastable(spells.waterShield, PLAYER_TARGET) then
+        self.dbgPrint("should cast watershield")
+        GMR.Cast(spells.waterShield, "target")
+        return
+    end
+
     if isTargetAttackable and spellKnown.flameShock and GMR.IsCastable(spells.flameShock, "target")
             and GMR.IsSpellInRange(spells.flameShock, "target") and shouldCastFlameShock then
         self.dbgPrint("should cast lightningBolt")
         GMR.Cast(spells.flameShock, "target")
+        return
+    end
+
+    if isTargetAttackable
+        and not GMR.PlayerHasAura(buffs.totemOfWrathGlyph)
+        and GMR.IsCastable(spells.totemOfWrath, "target") then
+        self.dbgPrint("should cast totemOfWrath")
+        GMR.Cast(spells.totemOfWrath, "target")
         return
     end
 
