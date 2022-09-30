@@ -397,7 +397,7 @@ function Rotation:execute()
     if spellKnown.thunderstorm
             and GetSpellCooldown(spells.thunderstorm) == 0
             and spellKnown.thunderstorm
-            and (enemiesAround8y > 1 or currentMana < 50) then
+            and (enemiesAround8y > 1 or currentMana < 80) then
         if GMR.IsCastable(spells.thunderstorm, "target") then
             self.dbgPrint("should use thunderstorm")
             GMR.Cast(spells.thunderstorm, "target")
@@ -415,7 +415,7 @@ function Rotation:execute()
 
     if isTargetAttackable and spellKnown.flameShock and GMR.IsCastable(spells.flameShock, "target")
             and GMR.IsSpellInRange(spells.flameShock, "target") and shouldCastFlameShock then
-        self.dbgPrint("should cast lightningBolt")
+        self.dbgPrint("should cast flameshock")
         GMR.Cast(spells.flameShock, "target")
         return
     end
