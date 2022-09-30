@@ -421,7 +421,7 @@ function Rotation:execute()
     end
 
     if isTargetAttackable
-        and not GMR.PlayerHasAura(buffs.totemOfWrathGlyph)
+        and not GMR.HasBuff(PLAYER_TARGET, buffs.totemOfWrathGlyph, true)
         and spellKnown.totemOfWrath
         and GMR.IsCastable(spells.totemOfWrath, "target") then
         self.dbgPrint("should cast totemOfWrath")
