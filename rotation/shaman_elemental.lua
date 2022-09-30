@@ -395,7 +395,7 @@ function Rotation:execute()
 
     -- Thunderstorm
     if spellKnown.thunderstorm
-            and GetSpellCooldown(spells.thunderstorm) == 0
+            and GMR.GetSpellCooldown(spells.thunderstorm) == 0
             and spellKnown.thunderstorm
             and (enemiesAround8y > 1 or currentMana < 80)
             and GMR.IsCastable(spells.thunderstorm, "target") then
@@ -405,7 +405,7 @@ function Rotation:execute()
     end
 
     if spellKnown.lavaBurst
-            and GetSpellCooldown(spells.lavaBurst) == 0
+            and GMR.GetSpellCooldown(spells.lavaBurst) == 0
             and not shouldCastFlameShock
             and GMR.IsCastable(spells.lavaBurst, "target") then
         self.dbgPrint("should use lavaburst")
