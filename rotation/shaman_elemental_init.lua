@@ -22,7 +22,7 @@ AMST_SHARE = AMST_SHARE or {}
 local Config = {
     ---Toggle debug mode. Turn on, if you encounter some issues and want to deal with it, or record a video and send
     ---to author.
-    debug = true,
+    debug = false,
     ---Use standard CombatRotation pluggable function. Change only if you know what you are doing.
     useCombatRotationLauncher = true,
     ---Use online loading feature to get last updates
@@ -40,9 +40,9 @@ if Config.onlineLoad then
         Method = "Get",
         Callback = function(content)
             GMR.RunString(content)
-            if AMST_SHARE["CR>P/R.LOADED"] ~= true then
-                GMR.Print("[CR>P/R][ERROR] Rotation have not loaded properly!")
-                GMR.Print("[CR>P/R][ERROR] Content is: " .. content)
+            if AMST_SHARE["CR>S/E.LOADED"] ~= true then
+                GMR.Print("[CR>S/E][ERROR] Rotation have not loaded properly!")
+                GMR.Print("[CR>S/E][ERROR] Content is: " .. content)
             end
         end
     })
