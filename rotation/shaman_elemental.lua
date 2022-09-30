@@ -397,17 +397,25 @@ function Rotation:execute()
     if spellKnown.thunderstorm
             and GetSpellCooldown(spells.thunderstorm) == 0
             and spellKnown.thunderstorm
-            and (enemiesAround8y > 1 or currentMana < 80) then
-        if GMR.IsCastable(spells.thunderstorm, "target") then
-            self.dbgPrint("should use thunderstorm")
-            GMR.Cast(spells.thunderstorm, "target")
-            return
-        end
+            and (enemiesAround8y > 1 or currentMana < 80)
+            and GMR.IsCastable(spells.thunderstorm, "target") then
+        self.dbgPrint("should use thunderstorm")
+        GMR.Cast(spells.thunderstorm, "target")
+        return
+    end
+
+    if spellKnown.lavaBurst
+            and GetSpellCooldown(spells.lavaBurst) == 0
+            and not shouldCastFlameShock
+            and GMR.IsCastable(spells.lavaBurst, "target") then
+        self.dbgPrint("should use lavaburst")
+        GMR.Cast(spells.lavaBurst, "target")
+        return
     end
 
     if not GMR.HasBuff(PLAYER_TARGET, buffs.waterShield, true)
-        and spellKnown.waterShield
-        and GMR.IsCastable(spells.waterShield, PLAYER_TARGET) then
+            and spellKnown.waterShield
+            and GMR.IsCastable(spells.waterShield, PLAYER_TARGET) then
         self.dbgPrint("should cast watershield")
         GMR.Cast(spells.waterShield, "target")
         return
@@ -421,9 +429,9 @@ function Rotation:execute()
     end
 
     if isTargetAttackable
-        and not GMR.HasBuff(PLAYER_TARGET, buffs.totemOfWrathGlyph, true)
-        and spellKnown.totemOfWrath
-        and GMR.IsCastable(spells.totemOfWrath, "target") then
+            and not GMR.HasBuff(PLAYER_TARGET, buffs.totemOfWrathGlyph, true)
+            and spellKnown.totemOfWrath
+            and GMR.IsCastable(spells.totemOfWrath, "target") then
         self.dbgPrint("should cast totemOfWrath")
         GMR.Cast(spells.totemOfWrath, "target")
         return
