@@ -59,7 +59,7 @@ local spells = {
     earthShock = GetSpellInfo(49231),
     frostShock = GetSpellInfo(49236),
     flameTongueWeapon = GetSpellInfo(58790),
-    waterShield = GetSpellInfo(58790),
+    waterShield = GetSpellInfo(33736),
     callOfTheElements = GetSpellInfo(66842),
     elementalMastery = GetSpellInfo(16166)
 }
@@ -396,6 +396,7 @@ function Rotation:execute()
     -- Thunderstorm
     if spellKnown.thunderstorm
             and GetSpellCooldown(spells.thunderstorm) == 0
+            and spellKnown.thunderstorm
             and (enemiesAround8y > 1 or currentMana < 50) then
         if GMR.IsCastable(spells.thunderstorm, "target") then
             self.dbgPrint("should use thunderstorm")
@@ -405,6 +406,7 @@ function Rotation:execute()
     end
 
     if not GMR.HasBuff(PLAYER_TARGET, buffs.waterShield, true)
+        and spellKnown.waterShield
         and GMR.IsCastable(spells.waterShield, PLAYER_TARGET) then
         self.dbgPrint("should cast watershield")
         GMR.Cast(spells.waterShield, "target")
@@ -420,6 +422,7 @@ function Rotation:execute()
 
     if isTargetAttackable
         and not GMR.PlayerHasAura(buffs.totemOfWrathGlyph)
+        and spellKnown.totemOfWrath
         and GMR.IsCastable(spells.totemOfWrath, "target") then
         self.dbgPrint("should cast totemOfWrath")
         GMR.Cast(spells.totemOfWrath, "target")
