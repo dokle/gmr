@@ -27,7 +27,10 @@ local Config = {
     useCombatRotationLauncher = true,
     ---Use online loading feature to get last updates
     onlineLoad = true,
-
+    --- Totem Calling id, use 0=none, 1=elements, 2=spirits, 3=ancestors
+    useTotemCalling = 0,
+    useLesserHealingWaveWhenBelowHp = 30,
+    useHealingWaveWhenBelowHp = 50
 }
 
 

@@ -20,7 +20,7 @@ AMST_SHARE["CR>S/E.LOADED"] = true
 local VERSION = "v1.0.0"
 local printMsgPrefix = "[CR>S/E|" .. VERSION .. "] "
 local PLAYER_TARGET = "player"
-
+local CLASS_SHAMAN = "SHAMAN"
 ---Print message with CR prefix
 ---@param msg string
 local function Print(msg)
@@ -31,27 +31,10 @@ local function Error(msg)
     Print(printMsgPrefix .. "[ERROR]  " .. msg)
 end
 
-local CLASS_WARRIOR = "WARRIOR"
-local CLASS_PALADIN = "PALADIN"
-local CLASS_HUNTER = "HUNTER"
-local CLASS_ROGUE = "ROGUE"
-local CLASS_PRIEST = "PRIEST"
-local CLASS_DEATHKNIGHT = "DEATHKNIGHT"
-local CLASS_SHAMAN = "SHAMAN"
-local CLASS_MAGE = "MAGE"
-local CLASS_WARLOCK = "WARLOCK"
-local CLASS_MONK = "MONK"
-local CLASS_DRUID = "DRUID"
-local CLASS_DEMONHUNTER = "DEMONHUNTER"
-local CLASS_EVOKER = "EVOKER"
-
 local spells = {
     lightningBolt = GetSpellInfo(49238),
     chainLightning = GetSpellInfo(49271),
     thunderstorm = GetSpellInfo(59159),
-    totemOfWrath = GetSpellInfo(57722),
-    manaSpringTotem = GetSpellInfo(58774),
-    healingStreamTotem = GetSpellInfo(58757),
     healingWave = GetSpellInfo(49273),
     lesserHealingWave = GetSpellInfo(8004),
     lavaBurst = GetSpellInfo(60043),
@@ -61,6 +44,8 @@ local spells = {
     flameTongueWeapon = GetSpellInfo(58790),
     waterShield = GetSpellInfo(33736),
     callOfTheElements = GetSpellInfo(66842),
+    callOfTheAncestors = GetSpellInfo(66843),
+    callOfTheSpirits = GetSpellInfo(66844),
     elementalMastery = GetSpellInfo(16166)
 }
 
@@ -79,18 +64,16 @@ local spellKnown = {
     frostShock = GMR.IsSpellKnown(spells.frostShock),
     flameTongueWeapon = GMR.IsSpellKnown(spells.flameTongueWeapon),
     elementalMastery = GMR.IsSpellKnown(spells.elementalMastery),
-    waterShield = GMR.IsSpellKnown(spells.waterShield)
+    waterShield = GMR.IsSpellKnown(spells.waterShield),
+    callOfTheElements = GMR.IsSpellKnown(spells.callOfTheElements),
+    callOfTheAncestors = GMR.IsSpellKnown(spells.callOfTheAncestors),
+    callOfTheSpirits = GMR.IsSpellKnown(spells.callOfTheSpirits)
 }
 
 local buffs = {
     waterShield = GetSpellInfo(33736),
     totemOfWrath = GetSpellInfo(57662),
     totemOfWrathGlyph = GetSpellInfo(63283)
-}
-
-local buffSameClassLists = {
-    { buffs.greaterBlessingOfMight, buffs.blessingOfMight, buffs.battleShout },
-    { buffs.greaterBlessingOfKings, buffs.blessingOfKings },
 }
 
 local debuffs = {
@@ -168,80 +151,6 @@ local debuffIndex = {}
 for _, v in pairs(debuffs) do
     debuffIndex[v] = true
 end
-
-local debuffsLowPriority = {
-    debuffs.wintersChill,
-    debuffs.improvedScorch,
-    debuffs.corruption,
-    debuffs.ignite,
-    debuffs.righteousVengeance,
-    debuffs.flameShock,
-    debuffs.moonfire,
-    debuffs.holyVengeance,
-    debuffs.judgementOfLight,
-    debuffs.shadowWordPain,
-    debuffs.bloodPlague,
-    debuffs.chilled,
-    debuffs.serpentSting,
-    debuffs.judgementOfWisdom,
-    debuffs.deadlyPoison,
-    debuffs.deadlyPoison7,
-    debuffs.shadowMastery,
-    debuffs.ebonPlague,
-    debuffs.frostFever,
-    debuffs.huntersMark,
-    debuffs.faerieFire,
-    debuffs.vindication,
-    debuffs.frostbolt,
-    debuffs.cryptFever,
-    debuffs.blackArrow,
-    debuffs.faerieFireFeral,
-}
-
-local debuffNotRecommendDispelList = {
-    debuffs.livingBomb,
-    debuffs.vampiricTouch
-}
-
-local debuffNeverDispelList = {
-    debuffs.unstableAffliction,
-}
-
-local debuffTopPriorityList = {
-    debuffs.frostbite,
-    debuffs.chainsOfIce,
-    debuffs.hammerOfJustice,
-    debuffs.strangulate,
-    debuffs.thunderclap,
-    debuffs.woundPoison5,
-    debuffs.shatteredBarrier,
-    debuffs.silencedShieldOfTheTemplar,
-    debuffs.psychicScream,
-    debuffs.frostNova,
-    debuffs.judgementOfJustice,
-    debuffs.repentance,
-    debuffs.shadowfury,
-    debuffs.viperSting,
-    debuffs.haunt,
-    debuffs.deathCoil,
-    debuffs.silencingShot,
-    debuffs.psychicHorror,
-    debuffs.spellLock,
-    debuffs.freezingTrapEffect,
-    debuffs.markOfBlood,
-    debuffs.freeze,
-}
-
-local debuffCustomLogicList = {
-    debuffs.livingBomb,
-}
-
-local debuffBlessingOfFreedomList = {
-    debuffs.envelopingWeb,
-}
-
-local glyphSpells = {
-}
 
 ---@class ShamanConfig
 local Config = {
@@ -336,35 +245,6 @@ function Rotation:new(cfg, state)
     return o
 end
 
-local function HasBuffClassed(unit, buff, byPlayer)
-    local hasSameClassBuff = false
-    local sameClassBuffList = nil
-    for _, list in ipairs(buffSameClassLists) do
-        for _, buffFromList in ipairs(list) do
-            if buff == buffFromList then
-                hasSameClassBuff = true
-                sameClassBuffList = list
-                break
-            end
-        end
-        if hasSameClassBuff then
-            break
-        end
-    end
-
-    if not hasSameClassBuff then
-        return GMR.HasBuff(unit, buff, byPlayer)
-    end
-
-    for _, buffFromList in ipairs(sameClassBuffList) do
-        if GMR.HasBuff(unit, buffFromList, byPlayer) then
-            return true
-        end
-    end
-
-    return false
-end
-
 ---@return void
 function Rotation:execute()
     if self:isStunned() then
@@ -447,6 +327,15 @@ function Rotation:execute()
 
 end
 
+--- Theory:
+--- 1) Check if any Totem is placed? how to detect totems only by me???
+--- 2) If none: Check if any totemCall is selected
+--- 3) if yes: place totems
+--- 4) if totems placed but no longer in range: remove them?? but how?
+function Rotation:CallTotems()
+
+end
+
 ---@return boolean
 function Rotation:isSilent()
     return false
@@ -463,7 +352,7 @@ end
 
 do
     local isSuccess, err = pcall(function()
-        if GMR.GetClass("player") == "SHAMAN" then
+        if GMR.GetClass("player") == CLASS_SHAMAN then
             Print("Rotation would be initialized")
 
             local cfg = Config:new()
