@@ -160,7 +160,10 @@ local Config = {
     ---Use standard CombatRotation pluggable function. Change only if you know what you are doing.
     useCombatRotationLauncher = false,
     ---Use online loading feature to get last updates
-    onlineLoad = true
+    onlineLoad = true,
+    useTotemCalling = 0,
+    useLesserHealingWaveWhenBelowHp = 30,
+    useHealingWaveWhenBelowHp = 50,
 }
 
 function Config:new()
@@ -272,6 +275,7 @@ function Rotation:execute()
             and not GMR.IsImmune("target")
     local enemiesAround8y = GMR.GetNumEnemies("player", 8)
 
+    self:HealSelf()
 
     -- Thunderstorm
     if spellKnown.thunderstorm
@@ -334,6 +338,23 @@ end
 --- 4) if totems placed but no longer in range: remove them?? but how?
 function Rotation:CallTotems()
 
+end
+
+function Rotation:HealSelf()
+    if Config.useLesserHealingWaveWhenBelowHp >= GMR.GetHealth("player")
+            and spellKnown.lesserHealingWave
+            and GMR.IsCastable(spells.lesserHealingWave, "player") then
+        self.dbgPrint("should cast healingWave")
+        GMR.Cast(spells.lesserHealingWave, "player")
+        return
+    end
+    if Config.useHealingWaveWhenBelowHp >= GMR.GetHealth("player")
+            and spellKnown.healingWave
+            and GMR.IsCastable(spells.healingWave, "player") then
+        self.dbgPrint("should cast healingWave")
+        GMR.Cast(spells.healingWave, "player")
+        return
+    end
 end
 
 ---@return boolean
